@@ -6,13 +6,12 @@
 function RandomBar (inCanvas) 
 {
     this.HEIGHT = 30;
-    this.WIDTH  = 300;
+    this.WIDTH  = 500;
     this.canvas = inCanvas;
     this.ctx    = inCanvas.getContext('2d');
-    this.PosX   = 500;
-    this.PosY   = 500;
-    this.cursorPosX = 30;
-    
+    this.PosX   = 0;
+    this.PosY   = 70;
+    this.cursorPosX = 30; 
 }
 
 RandomBar.prototype.paint = function ()
