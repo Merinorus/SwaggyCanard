@@ -19,7 +19,7 @@ App.prototype.renderLoop = function ()
 	if (myApp.GL_Canard != undefined)
 	{
 		myApp.GL_Canard.rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.005);
-		if (myApp.GL_Canard.scale.y * 180 < $('#container').height() * 0.35) 
+		if (myApp.GL_Canard.scale.y * 180 < $('#container').height() / 2) 
 			myApp.GL_Canard.scale.set(myApp.GL_Canard.scale.x * 1.001, myApp.GL_Canard.scale.y * 1.001, myApp.GL_Canard.scale.z * 1.001);
 	}
 
