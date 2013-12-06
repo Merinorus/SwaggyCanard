@@ -79,7 +79,3 @@ App.prototype.main = function ()
 {
 	this.renderCanard();
 }
-
-$(document).ready(function() {
-	new App().main();
-});
