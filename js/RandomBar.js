@@ -31,16 +31,49 @@ RandomBar.prototype.paint = function ()
         this.ctx.beginPath();
         this.ctx.moveTo(this.PosX+this.cursorPosX, this.PosY);
         this.ctx.lineTo(this.PosX+this.cursorPosX, this.PosY+this.HEIGHT);
-        this.ctx.lineWidth = 15;
+        this.ctx.lineWidth = 5;
         this.ctx.stroke();
+                
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.PosX+200, this.PosY);
+        this.ctx.lineTo(this.PosX+200, this.PosY+this.HEIGHT);
+        this.ctx.lineWidth = 1;
+        this.ctx.stroke();
+                
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.PosX+300, this.PosY);
+        this.ctx.lineTo(this.PosX+300, this.PosY+this.HEIGHT);
+        this.ctx.lineWidth = 1;
+        this.ctx.stroke();
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.PosX+240, this.PosY);
+        this.ctx.lineTo(this.PosX+240, this.PosY+this.HEIGHT);
+        this.ctx.lineWidth = 1;
+        this.ctx.stroke();
+                
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.PosX+260, this.PosY);
+        this.ctx.lineTo(this.PosX+260, this.PosY+this.HEIGHT);
+        this.ctx.lineWidth = 1;
+        this.ctx.stroke();
+  
         
     this.ctx.restore();
 }
 
 RandomBar.prototype.next = function ()
 {
-    this.cursorPosX+=10;
+    this.cursorPosX+=5;
     this.cursorPosX%=this.WIDTH;
     this.paint();
     myFoodbar.paint();
+}
+
+RandomBar.prototype.quality = function ()
+{
+    if (this.cursorPosX < 200 || this.cursorPosX > 300) return 0;
+    else if (this.cursorPosX < 240 || this.cursorPosX > 260) return 1;
+    else  return 2;
+    
 }

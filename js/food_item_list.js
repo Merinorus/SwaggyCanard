@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function food_item(chemin_image, nom, gain_poids, qualite) {
-    this.chemin_image = chemin_image;
-    this.nom = nom;
-    this.gain_poids = gain_poids;
-    this.qualite = qualite;
+function clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
 }
 
 function food_item_list() {
@@ -16,19 +18,37 @@ function food_item_list() {
 
 food_item_list.prototype.addItem = function (Item)
 {
-    this.food_tab.push(Item);
+    this.food_tab.push(clone(Item));
 }
+
 food_item_list.prototype.load = function () {
+    
     var liste=document.getElementById("food_list");
     liste.innerHTML = "";
+    
+    var poids = 2000;
+    for(var i = 0; i < this.food_tab.length; i++) {
+    {
+        var item = this.food_tab[i];
+    }
+        poids += item.poids * (1+item.qualite);
+    }
+    
+    var p=document.createElement('p');
+    p.innerHTML = "Poids du canard : "+poids+" g" ;
+    liste.appendChild(p);
+    
     var ul=document.createElement('ul');
     liste.appendChild(ul);
     for(var i = 0; i < this.food_tab.length; i++) {
         var li=document.createElement('li');
         ul.appendChild(li);
         li.style.textDecoration="none";
+
         li.innerHTML=this.food_tab[i].nom;
         if(this.food_tab[i].qualite === 0) li.innerHTML = li.innerHTML + " de merde";
         else if (this.food_tab[i].qualite === 2) li.innerHTML = li.innerHTML + " qui déchire sa race";
     }
+    
+    
 }

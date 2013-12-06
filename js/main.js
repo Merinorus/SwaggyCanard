@@ -12,18 +12,18 @@ function App()
 	this.GL_ImageLoader	= new THREE.ImageLoader(this.GL_Manager);
 	this.GL_Texture 	= new THREE.Texture();
 	this.GL_Ambient		= new THREE.AmbientLight(0x404040);
-	this.GL_Directional = new THREE.DirectionalLight(0xFFEEDD);
+	this.GL_Directional     = new THREE.DirectionalLight(0xFFEEDD);
 	
 	// Database
 	this.DB_Ingredients = {"ingredients": [
-		{ "nom": "Laque", 	"poids": "100", 	"qualite": "1", 	"image": "images/laque.png" },
-		{ "nom": "Miel", 	"poids": "100", 	"qualite": "1", 	"image": "images/miel.png" },
-		{ "nom": "Figue", 	"poids": "100", 	"qualite": "1", 	"image": "images/figue.png" },
-		{ "nom": "Pomme", 	"poids": "100", 	"qualite": "1", 	"image": "images/pomme.png" },
-		{ "nom": "Mangue", 	"poids": "100", 	"qualite": "1", 	"image": "images/mangue.png" },
-		{ "nom": "Oignon", 	"poids": "100", 	"qualite": "1", 	"image": "images/oignon.png" },
-		{ "nom": "Olive", 	"poids": "100", 	"qualite": "1", 	"image": "images/olive.png" },
-		{ "nom": "Orange", 	"poids": "100", 	"qualite": "1", 	"image": "images/orange.png" }
+		{ "nom": "Laque", 	"poids": "20", 	"qualite": "1", 	"image": "images/laque.png" },
+		{ "nom": "Miel", 	"poids": "100", "qualite": "1", 	"image": "images/miel.png" },
+		{ "nom": "Figue", 	"poids": "100", "qualite": "1", 	"image": "images/figue.png" },
+		{ "nom": "Pomme", 	"poids": "50", 	"qualite": "1", 	"image": "images/pomme.png" },
+		{ "nom": "Mangue", 	"poids": "70", 	"qualite": "1", 	"image": "images/mangue.png" },
+		{ "nom": "Oignon", 	"poids": "10", 	"qualite": "1", 	"image": "images/oignon.png" },
+		{ "nom": "Olive", 	"poids": "20", 	"qualite": "1", 	"image": "images/olive.png" },
+		{ "nom": "Orange", 	"poids": "30", 	"qualite": "1", 	"image": "images/orange.png" }
 	]
 	};
 	
@@ -48,11 +48,11 @@ function App()
 													"I2": {"Nom": "Oignon", 	"Qualite": "0" },
 													"I3": {"Nom": "Pomme", 		"Qualite": "0" } },
 
-		{ "Nom": "Cannard laqué à la mangue",		"I1": {"Nom": "Laque", 		"Qualite": "0" },
+		{ "Nom": "Canard laqué à la mangue",		"I1": {"Nom": "Laque", 		"Qualite": "0" },
 													"I2": {"Nom": "Miel", 		"Qualite": "0" },
 													"I3": {"Nom": "Mangue", 	"Qualite": "0" } },
 
-		{ "Nom": "Cannard laqué aux pommes",		"I1": {"Nom": "Laque", 		"Qualite": "0" },
+		{ "Nom": "Canne à sucre",		"I1": {"Nom": "Laque", 		"Qualite": "0" },
 													"I2": {"Nom": "Miel", 		"Qualite": "0" },
 													"I3": {"Nom": "Pomme", 		"Qualite": "0" } },
 	
@@ -69,6 +69,7 @@ function App()
 
 App.prototype.renderLoop = function ()
 {
+    //console.debug ("render loop");
 	if (myApp.GL_Canard != undefined)
 	{
 		myApp.GL_Canard.rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.005);
@@ -149,7 +150,7 @@ App.prototype.getRecipeFromIngredients = function (i1, i2, i3)
 			|| 	(i3 == this.DB_Recettes.recettes[i].I1.Nom || i3 == this.DB_Recettes.recettes[i].I2.Nom || i3 == this.DB_Recettes.recettes[i].I3.Nom))
 				return this.DB_Recettes.recettes[i].Nom;
 	
-	return "LOL PAS 2 RECETTE";
+	return "Canard boiteux";
 }
 
 App.prototype.main = function ()
