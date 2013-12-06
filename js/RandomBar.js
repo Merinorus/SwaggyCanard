@@ -18,7 +18,7 @@ RandomBar.prototype.paint = function ()
 {
     this.ctx.save();
         this.ctx.rect(this.PosX, this.PosY, this.WIDTH, this.HEIGHT);
-        var grd=this.ctx.createLinearGradient(this.PosX,0,this.PosX+this.WIDTH,0);
+        var grd=this.ctx.createLinearGradient(this.PosX,this.PosY,this.PosX+this.WIDTH,this.PosY);
         grd.addColorStop(0,"red");
         grd.addColorStop(0.25,"red");
         grd.addColorStop(0.50, "green");
@@ -42,4 +42,5 @@ RandomBar.prototype.next = function ()
     this.cursorPosX+=10;
     this.cursorPosX%=this.WIDTH;
     this.paint();
+    myFoodbar.paint();
 }

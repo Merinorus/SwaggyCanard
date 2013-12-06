@@ -72,8 +72,6 @@ App.prototype.renderLoop = function ()
 	if (myApp.GL_Canard != undefined)
 	{
 		myApp.GL_Canard.rotateOnAxis(new THREE.Vector3(0, 1, 0), 0.005);
-		if (myApp.GL_Canard.scale.y * 180 < $('#container').height() / 2) 
-			myApp.GL_Canard.scale.set(myApp.GL_Canard.scale.x * 1.001, myApp.GL_Canard.scale.y * 1.001, myApp.GL_Canard.scale.z * 1.001);
 	}
 
 	myApp.GL_Camera.lookAt(myApp.GL_Scene.position);
@@ -157,4 +155,10 @@ App.prototype.getRecipeFromIngredients = function (i1, i2, i3)
 App.prototype.main = function ()
 {
 	this.renderCanard();
+}
+
+App.prototype.feed = function (weight) {
+    this.GL_Canard.scale.x +=  weight / 350 ;
+    this.GL_Canard.scale.y +=  weight / 350 ;
+    this.GL_Canard.scale.z +=  weight / 350 ;
 }

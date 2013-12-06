@@ -26,14 +26,18 @@ and open the template in the editor.
     <body onload="main()" style="background-color:brown">
     <center>
     <div id="container" ></div> <!-- Canard rendering area -->
-    <div id="food_list" ></div>
+    <div id="foodItem">
         <canvas id="main" width="500" height="100"> No HTML 5 ?! haha Gayyy ! </canvas>
+    </div>
+        <div id="food_list" ></div>
         <script type="text/javascript">
             var myFoodbar;
             var myFoodList;
             var myInit;
             var myRandomBar;
             var myCannard;
+            var myIntervalRandomBarID = -1;
+            var myCurrentItem;
             function OnClick (event)
             {
                 Coor_X = event.pageX;
@@ -41,14 +45,28 @@ and open the template in the editor.
                 var item = myFoodbar.whichItem({X : Coor_X, Y : Coor_Y});
                 if (item !== -1)
                 {
-                    myFoodList.addItem(myInit.food_tab[item]);
-                    myFoodList.load();
+                    if (myIntervalRandomBarID === -1)
+                    {
+                        startRandomBar();
+                        myCurrentItem = myInit.food_tab[item];
+                        
+                    }
+                    else
+                    {
+                        myFoodList.addItem(myCurrentItem);
+                        myFoodList.load();
+                        stopRandomBar();
+                        console.debug(myCurrentItem);
+                        myCannard.feed(myCurrentItem.gain_poids);
+                    }
                 }
+                
             };
-            main = function ()
-			{                
+
+            main = function (){
+                
                 myCannard = new App();
-				myCannard.main();
+                myCannard.main();
                 
                 var canvas = document.getElementById("main");
                 canvas.addEventListener("mousedown", OnClick, false);
@@ -68,13 +86,18 @@ and open the template in the editor.
                     myFoodbar.loadPic(myCannard.DB_Ingredients.ingredients[i].image, myCannard.DB_Ingredients.ingredients[i].nom, i);
 				
                 myFoodbar.paint();
-                startRandomBar();
-								
+
             };
             
             function startRandomBar () 
             {
-                setInterval("myRandomBar.next()", 30);
+                myRandomBar.cursorPosX = 0;
+                myIntervalRandomBarID=setInterval("myRandomBar.next()", 30);
+            }
+            function stopRandomBar ()
+            {
+                clearInterval(myIntervalRandomBarID);
+                myIntervalRandomBarID= -1;
             }
               
             
