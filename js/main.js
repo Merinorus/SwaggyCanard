@@ -68,7 +68,7 @@ App.prototype.renderCanard = function ()
 	this.GL_Scene.add(this.GL_Directional);
 	
 	// Renderering parameters
-	//this.GL_Renderer.setClearColorHex(0xFFFFFF, 1);
+	this.GL_Renderer.setClearColorHex(0xFFFFFF, 1);
 	this.GL_Renderer.setSize(this.GL_Container.width(), this.GL_Container.height());
 
 	// Add content to Div
