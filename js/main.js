@@ -135,6 +135,7 @@ App.prototype.getRecipeFromIngredients = function (i1, i2, i3)
 			&& 	(i2 == this.DB_Recettes.recettes[i].I1.Nom || i2 == this.DB_Recettes.recettes[i].I2.Nom || i2 == this.DB_Recettes.recettes[i].I3.Nom)
 			&& 	(i3 == this.DB_Recettes.recettes[i].I1.Nom || i3 == this.DB_Recettes.recettes[i].I2.Nom || i3 == this.DB_Recettes.recettes[i].I3.Nom))
 				return this.DB_Recettes.recettes[i].Nom;
+
 	for (i = 0; i < this.DB_Recettes.recettes.length; ++i)
 		if (	((i1 == this.DB_Recettes.recettes[i].I1.Nom || i1 == this.DB_Recettes.recettes[i].I2.Nom || i1 == this.DB_Recettes.recettes[i].I3.Nom)
 			&&	 (i2 == this.DB_Recettes.recettes[i].I1.Nom || i2 == this.DB_Recettes.recettes[i].I2.Nom || i2 == this.DB_Recettes.recettes[i].I3.Nom))
