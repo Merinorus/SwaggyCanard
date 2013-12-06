@@ -45,32 +45,31 @@ and open the template in the editor.
                     myFoodList.load();
                 }
             };
-            main = function (){
-                
-                myCannard = new App().main();
+            main = function ()
+			{                
+                myCannard = new App();
+				myCannard.main();
                 
                 var canvas = document.getElementById("main");
                 canvas.addEventListener("mousedown", OnClick, false);
-                
                 
                 ctxt = canvas.getContext('2d');
                 myFoodbar=new foodbar(canvas);
                 myFoodList=new food_item_list;
                 myRandomBar=new RandomBar(canvas);
                 myRandomBar.paint();
-                
-              
+
                 ctxt.save();
-                    ctxt.fillStyle = "white";
-                    ctxt.fillRect(0,0, 800, 800);
+				ctxt.fillStyle = "white";
+				ctxt.fillRect(0,0, 800, 800);
                 ctxt.restore();
-                
-                myInit = new init();
-                for (i = 0; i < myInit.food_tab.length; ++i){
-                    myFoodbar.loadPic(myInit.food_tab[i].chemin_image, myInit.food_tab[i].nom, i);
-                }
+
+				for (i = 0; i < myCannard.DB_Ingredients.ingredients.length; ++i)
+                    myFoodbar.loadPic(myCannard.DB_Ingredients.ingredients[i].image, myCannard.DB_Ingredients.ingredients[i].nom, i);
+				
                 myFoodbar.paint();
                 startRandomBar();
+								
             };
             
             function startRandomBar () 

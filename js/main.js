@@ -1,6 +1,7 @@
 var myApp;
 function App()
 {
+	// 3D Rendering
 	this.GL_Canard;
 	this.GL_Container 	= $('#container');
 	this.GL_Camera 		= new THREE.PerspectiveCamera(45, $('#container').width() / $('#container').height(), 1, 2000);
@@ -12,6 +13,58 @@ function App()
 	this.GL_Texture 	= new THREE.Texture();
 	this.GL_Ambient		= new THREE.AmbientLight(0x404040);
 	this.GL_Directional = new THREE.DirectionalLight(0xFFEEDD);
+	
+	// Database
+	this.DB_Ingredients = {"ingredients": [
+		{ "nom": "Laque", 	"poids": "100", 	"qualite": "1", 	"image": "images/laque.png" },
+		{ "nom": "Miel", 	"poids": "100", 	"qualite": "1", 	"image": "images/miel.png" },
+		{ "nom": "Figue", 	"poids": "100", 	"qualite": "1", 	"image": "images/figue.png" },
+		{ "nom": "Pomme", 	"poids": "100", 	"qualite": "1", 	"image": "images/pomme.png" },
+		{ "nom": "Mangue", 	"poids": "100", 	"qualite": "1", 	"image": "images/mangue.png" },
+		{ "nom": "Oignon", 	"poids": "100", 	"qualite": "1", 	"image": "images/oignon.png" },
+		{ "nom": "Olive", 	"poids": "100", 	"qualite": "1", 	"image": "images/olive.png" },
+		{ "nom": "Orange", 	"poids": "100", 	"qualite": "1", 	"image": "images/orange.png" }
+	]
+	};
+	
+	this.DB_Recettes = {"recettes": [
+		{ "Nom": "Canard à la mangue",				"I1": {"Nom": "Mangue", 	"Qualite": "0" },
+													"I2": {"Nom": "Pomme", 		"Qualite": "0" },
+													"I3": {"Nom": "Miel", 		"Qualite": "0" } },
+
+		{ "Nom": "Canard aux figues",				"I1": {"Nom": "Figue", 		"Qualite": "0" },
+													"I2": {"Nom": "Miel", 		"Qualite": "0" },
+													"I3": {"Nom": "Pomme", 		"Qualite": "0" } },
+
+		{ "Nom": "Magret de canard aux pommes",		"I1": {"Nom": "Mangue", 	"Qualite": "0" },
+													"I2": {"Nom": "Pomme", 		"Qualite": "0" },
+													"I3": {"Nom": "Miel", 		"Qualite": "0" } },
+													
+		{ "Nom": "Canard dégueu",					"I1": {"Nom": "Oignon", 	"Qualite": "0" },
+													"I2": {"Nom": "Olive", 		"Qualite": "0" },
+													"I3": {"Nom": "Orange", 	"Qualite": "0" } },
+
+		{ "Nom": "Confit de canard aux oignons",	"I1": {"Nom": "Miel", 		"Qualite": "0" },
+													"I2": {"Nom": "Oignon", 	"Qualite": "0" },
+													"I3": {"Nom": "Pomme", 		"Qualite": "0" } },
+
+		{ "Nom": "Cannard laqué à la mangue",		"I1": {"Nom": "Laque", 		"Qualite": "0" },
+													"I2": {"Nom": "Miel", 		"Qualite": "0" },
+													"I3": {"Nom": "Mangue", 	"Qualite": "0" } },
+
+		{ "Nom": "Cannard laqué aux pommes",		"I1": {"Nom": "Laque", 		"Qualite": "0" },
+													"I2": {"Nom": "Miel", 		"Qualite": "0" },
+													"I3": {"Nom": "Pomme", 		"Qualite": "0" } },
+	
+		{ "Nom": "Canard laqué aux figues",			"I1": {"Nom": "Laque", 		"Qualite": "0" },
+													"I2": {"Nom": "Miel", 		"Qualite": "0" },
+													"I3": {"Nom": "Figues", 	"Qualite": "0" } },
+	
+		{ "Nom": "Confit de canard aux olives",		"I1": {"Nom": "Laque", 		"Qualite": "0" },
+													"I2": {"Nom": "Miel", 		"Qualite": "0" },
+													"I3": {"Nom": "Olive", 		"Qualite": "0" } },
+		]
+	};
 }
 
 App.prototype.renderLoop = function ()
@@ -68,11 +121,36 @@ App.prototype.renderCanard = function ()
 	this.GL_Scene.add(this.GL_Directional);
 	
 	// Renderering parameters
-	this.GL_Renderer.setClearColorHex(0xFFFFFF, 1);
+	this.GL_Renderer.setClearColor("brown", 1);
 	this.GL_Renderer.setSize(this.GL_Container.width(), this.GL_Container.height());
 
 	// Add content to Div
 	this.GL_Container.append(this.GL_Renderer.domElement);
+}
+
+App.prototype.getRecipeFromIngredients = function (i1, i2, i3)
+{
+	for (i = 0; i < this.DB_Recettes.recettes.length; ++i)
+		if (	(i1 == this.DB_Recettes.recettes[i].I1.Nom || i1 == this.DB_Recettes.recettes[i].I2.Nom || i1 == this.DB_Recettes.recettes[i].I3.Nom)
+			&& 	(i2 == this.DB_Recettes.recettes[i].I1.Nom || i2 == this.DB_Recettes.recettes[i].I2.Nom || i2 == this.DB_Recettes.recettes[i].I3.Nom)
+			&& 	(i3 == this.DB_Recettes.recettes[i].I1.Nom || i3 == this.DB_Recettes.recettes[i].I2.Nom || i3 == this.DB_Recettes.recettes[i].I3.Nom))
+				return this.DB_Recettes.recettes[i].Nom;
+	for (i = 0; i < this.DB_Recettes.recettes.length; ++i)
+		if (	((i1 == this.DB_Recettes.recettes[i].I1.Nom || i1 == this.DB_Recettes.recettes[i].I2.Nom || i1 == this.DB_Recettes.recettes[i].I3.Nom)
+			&&	 (i2 == this.DB_Recettes.recettes[i].I1.Nom || i2 == this.DB_Recettes.recettes[i].I2.Nom || i2 == this.DB_Recettes.recettes[i].I3.Nom))
+			||	((i1 == this.DB_Recettes.recettes[i].I1.Nom || i1 == this.DB_Recettes.recettes[i].I2.Nom || i1 == this.DB_Recettes.recettes[i].I3.Nom)
+			&&	 (i3 == this.DB_Recettes.recettes[i].I1.Nom || i3 == this.DB_Recettes.recettes[i].I2.Nom || i3 == this.DB_Recettes.recettes[i].I3.Nom))
+			||	((i2 == this.DB_Recettes.recettes[i].I1.Nom || i1 == this.DB_Recettes.recettes[i].I2.Nom || i1 == this.DB_Recettes.recettes[i].I3.Nom)
+			&&	 (i3 == this.DB_Recettes.recettes[i].I1.Nom || i3 == this.DB_Recettes.recettes[i].I2.Nom || i3 == this.DB_Recettes.recettes[i].I3.Nom)))
+				return this.DB_Recettes.recettes[i].Nom;
+	
+	for (i = 0; i < this.DB_Recettes.recettes.length; ++i)
+		if (	(i1 == this.DB_Recettes.recettes[i].I1.Nom || i1 == this.DB_Recettes.recettes[i].I2.Nom || i1 == this.DB_Recettes.recettes[i].I3.Nom)
+			|| 	(i2 == this.DB_Recettes.recettes[i].I1.Nom || i2 == this.DB_Recettes.recettes[i].I2.Nom || i2 == this.DB_Recettes.recettes[i].I3.Nom)
+			|| 	(i3 == this.DB_Recettes.recettes[i].I1.Nom || i3 == this.DB_Recettes.recettes[i].I2.Nom || i3 == this.DB_Recettes.recettes[i].I3.Nom))
+				return this.DB_Recettes.recettes[i].Nom;
+	
+	return "LOL PAS 2 RECETTE";
 }
 
 App.prototype.main = function ()
