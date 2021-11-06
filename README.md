@@ -1,7 +1,7 @@
 # Swaggy Canard
-
-MUCH SWAG: \>\>\> https://merinorus.github.io/SwaggyCanard/index.html <<<
-
+______________________
+[\>\>\> MUCH SWAG <<<](https://merinorus.github.io/SwaggyCanard/index.html)
+______________________
 
 
 ## Coin ??
