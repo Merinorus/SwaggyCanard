@@ -1,6 +1,6 @@
 # Swaggy Canard
 
-MUCH SWAG: \>\>\> https://merinorus.github.io/SwaggyCanard <<<
+MUCH SWAG: \>\>\> https://merinorus.github.io/SwaggyCanard/index.html <<<
 
 
 
